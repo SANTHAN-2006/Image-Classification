@@ -14,12 +14,21 @@ Include the neural network model diagram.
 
 ## DESIGN STEPS
 
-### STEP 1:
-Write your own steps
+### STEP 1: Problem Statement
+Define the objective of classifying handwritten digits (0-9) using a Convolutional Neural Network (CNN).
 
-### STEP 2:
-
-### STEP 3:
+### STEP 2:Dataset Collection
+Use the MNIST dataset, which contains 60,000 training images and 10,000 test images of handwritten digits.
+### STEP 3: Data Preprocessing
+Convert images to tensors, normalize pixel values, and create DataLoaders for batch processing.
+### STEP 4:Model Architecture
+Design a CNN with convolutional layers, activation functions, pooling layers, and fully connected layers.
+### STEP 5:Model Training
+Train the model using a suitable loss function (CrossEntropyLoss) and optimizer (Adam) for multiple epochs.
+### STEP 6:Model Evaluation
+Test the model on unseen data, compute accuracy, and analyze results using a confusion matrix and classification report.
+### STEP 7: Model Deployment & Visualization
+Save the trained model, visualize predictions, and integrate it into an application if needed.
 
 
 ## PROGRAM
