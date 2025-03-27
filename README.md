@@ -33,44 +33,72 @@ Save the trained model, visualize predictions, and integrate it into an applicat
 
 ## PROGRAM
 
-### Name:
-### Register Number:
+### Name: K SANTHAN KUMAR
+### Register Number: 212223240065
 ```python
 class CNNClassifier(nn.Module):
-    def __init__(self):
-        super(CNNClassifier, self).__init__()
-        # write your code here
-
-
-
-
+    def __init__(self): 
+        super(CNNClassifier, self).__init__() 
+        self.conv1 = nn.Conv2d(in_channels=1, out_channels=32, kernel_size=3, padding=1) 
+        self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1)  
+        self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1) 
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
+        self.fc1 = nn.Linear(128 * 3 * 3, 128) 
+        self.fc2 = nn.Linear(128, 64)
+        self.fc3 = nn.Linear(64, 10)
 
     def forward(self, x):
-        # write your code here
+        x = self.pool(torch.relu(self.conv1(x))) 
+        x = self.pool(torch.relu(self.conv2(x))) 
+        x = self.pool(torch.relu(self.conv3(x))) 
+        x = x.view(x.size(0), -1) # Flatten the tensor
+        x = torch.relu(self.fc1(x)) 
+        x = torch.relu(self.fc2(x)) 
+        x = self.fc3(x)
+        return x
+```
 
+```python
+# Initialize model
+model = CNNClassifier()
 
+# Initialize loss function
+criterion = nn.CrossEntropyLoss()
+
+# Initialize optimizer
+optimizer = optim.Adam(model.parameters(), lr=0.001)
 
 ```
 
 ```python
-# Initialize the Model, Loss Function, and Optimizer
-model =
-criterion =
-optimizer =
+# Train the model
 
-```
+def train_model(model, train_loader, criterion, optimizer, num_epochs=3, device="cuda"):
+    print('Name: K SANTHAN KUMAR')
+    print('Register Number: 212223240065')
 
-```python
-# Train the Model
-def train_model(model, train_loader, num_epochs=3):
+    model.to(device)
+    model.train()
 
-    # write your code here
+    for epoch in range(num_epochs):
+        running_loss = 0.0
+        for i, (inputs, labels) in enumerate(train_loader):
+            inputs, labels = inputs.to(device), labels.to(device)
 
-        
-        
-        
-        print('Name:        ')
-        print('Register Number:       ')
+            # Zero the parameter gradients
+            optimizer.zero_grad()
+
+            # Forward pass
+            outputs = model(inputs)
+            loss = criterion(outputs, labels)
+
+            # Backward pass and optimization
+            loss.backward()
+            optimizer.step()
+
+            # Accumulate loss
+            running_loss += loss.item()
+
         print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {running_loss/len(train_loader):.4f}')
 
 ```
@@ -78,20 +106,20 @@ def train_model(model, train_loader, num_epochs=3):
 ## OUTPUT
 ### Training Loss per Epoch
 
-Include the Training Loss per epoch
+![image](https://github.com/user-attachments/assets/d30e6a59-55e5-4a97-ac50-df2c7a292f76)
 
 ### Confusion Matrix
 
-Include confusion matrix here
+![image](https://github.com/user-attachments/assets/5b2a52c7-476d-4f23-888c-7769b3c76812)
 
 ### Classification Report
 
-Include Classification Report here
+![image](https://github.com/user-attachments/assets/3bda535b-031b-46c4-a4c1-906f34f50738)
 
 
 ### New Sample Data Prediction
 
-Include your sample input and output 
+![image](https://github.com/user-attachments/assets/987544be-4ab0-429c-85e3-80d63daa0d91)
 
 ## RESULT
-Include your result here.
+Thus, We have developed a convolutional deep neural network for image classification to verify the response for new images.
